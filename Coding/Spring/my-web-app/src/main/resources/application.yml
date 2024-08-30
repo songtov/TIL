@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: my-web-app
+jwt:
+  accessToken: ${ACCESS_TOKEN:token}

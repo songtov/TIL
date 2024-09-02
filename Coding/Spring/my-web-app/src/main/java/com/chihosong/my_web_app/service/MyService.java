@@ -19,28 +19,32 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class MyService {
 
     private final RestTemplate restTemplate;
-    private final Dotenv dotenv;
 
     @Value("${jwt.accessToken}")
     private String token;
 
+    @Value("${DDM.url}")
+    private String apiUrl;
+
+    @Value("${DDM.username}")
+    private String email;
+
+    @Value("${DDM.password}")
+    private String password;
+
     public MyService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
-        this.dotenv = Dotenv.configure().load();
     }
 
-    public String getToken(){
-        return dotenv.get("JWT_TOKEN");
-    }
 
     public String getApiUrl(){
-        return dotenv.get("DDM_API_URL");
+        return apiUrl;
     }
 
 
     public String makePostRequestAndGetToken() {
         String url = getApiUrl() + "/auth/signin";
-        MyRequestObject request = new MyRequestObject( dotenv.get("email"),  dotenv.get("password"), "true");
+        MyRequestObject request = new MyRequestObject( email,  password, "true");
 
         try {
             // Make the POST request and get the response as ApiResponse
@@ -62,7 +66,7 @@ public class MyService {
         String url = getApiUrl() + "/auth/signin";
 
         // Create an instance of the request object
-        MyRequestObject request = new MyRequestObject( dotenv.get("email") , dotenv.get("password"), "true");
+        MyRequestObject request = new MyRequestObject( email , password, "true");
 
         // Make the POST request
         try {
@@ -86,7 +90,7 @@ public class MyService {
     }
 
     public String makeAuthenticatedGetRequest() {
-        String token = getToken();
+
         if (token == null || token.isEmpty()) {
             return "Failed to retrieve token";
         }
@@ -106,7 +110,6 @@ public class MyService {
     }
 
     public String makeAuthenticatedPostRequest() {
-        String token = getToken();
         if (token == null || token.isEmpty()) {
             return "Failed to retrieve token";
         }

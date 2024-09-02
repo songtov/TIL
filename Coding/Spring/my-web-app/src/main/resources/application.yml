@@ -3,3 +3,8 @@ spring:
     name: my-web-app
 jwt:
   accessToken: ${ACCESS_TOKEN:token}
+
+DDM:
+    url: ${DDM_API_URL:localhost}
+    username: ${email:admin}
+    password: ${password:admin}

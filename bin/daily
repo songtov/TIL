@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+
+import os
+from datetime import datetime
+
+
+path = os.getcwd()
+daily_directory_path = path + '/daily'
+
+print("Daily note will be created in: ", daily_directory_path)
+
+today_daily_file_name = daily_directory_path + "/" + datetime.now().strftime("%Y-%m-%d-%a") + ".md"
+
+open(today_daily_file_name, "w")
+
+print("Daily note created: ", today_daily_file_name)
+

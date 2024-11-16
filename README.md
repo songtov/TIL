@@ -6,6 +6,6 @@
 
 - Books
 - Daily
-- Knowledge
+- Notes
 
 
